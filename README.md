@@ -4,7 +4,7 @@
 
 [![Terraform](https://img.shields.io/badge/Terraform-%3E%3D1.0-623CE4?logo=terraform)](https://www.terraform.io/)
 [![AWS](https://img.shields.io/badge/AWS-Cloud-FF9900?logo=amazon-aws)](https://aws.amazon.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 ---
 
