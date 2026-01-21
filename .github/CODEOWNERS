@@ -1,0 +1,55 @@
+# CODEOWNERS - Terraform Infrastructure Repository
+# This file defines code ownership and automatically assigns reviewers for PRs
+
+# =============================================================================
+# DEFAULT OWNER
+# =============================================================================
+# Owner for everything in the repo (unless overridden below)
+* @rajarshigit2441139
+
+# =============================================================================
+# ROOT CONFIGURATION FILES
+# =============================================================================
+# Critical root-level Terraform files
+/*.tf @rajarshigit2441139
+
+# =============================================================================
+# BACKEND CONFIGURATION (CRITICAL)
+# =============================================================================
+# Backend configuration files - extra scrutiny needed
+backendfiles/ @rajarshigit2441139
+
+# =============================================================================
+# MODULES (Require careful review)
+# =============================================================================
+# All module code
+/modules/ @rajarshigit2441139
+
+# =============================================================================
+# DOCUMENTATION
+# =============================================================================
+# README and documentation files
+*.md @rajarshigit2441139
+/docs/ @rajarshigit2441139
+
+# =============================================================================
+# CI/CD & AUTOMATION
+# =============================================================================
+# GitHub Actions workflows
+/.github/ @rajarshigit2441139
+/.github/workflows/ @rajarshigit2441139
+
+# =============================================================================
+# TERRAFORM VARIABLE FILES (SENSITIVE)
+# =============================================================================
+# All .tfvars files require review
+*.tfvars @rajarshigit2441139
+
+# Specific examples
+examples/ @rajarshigit2441139
+
+# =============================================================================
+# STENCIL FILES
+# =============================================================================
+# Stencil configuration and templates
+.stencil/ @rajarshigit2441139

@@ -1,0 +1,22 @@
+# Add automated checks on PRs
+name: PR Checks
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+      
+      - name: Terraform fmt check
+        run: terraform fmt -check -recursive
+      
+      - name: Terraform validate
+        run: |
+          terraform init -backend=false
+          terraform validate

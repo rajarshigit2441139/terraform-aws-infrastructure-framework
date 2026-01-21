@@ -1,0 +1,59 @@
+name: Feature request
+description: Suggest a new feature or enhancement
+labels:
+  - enhancement
+  - needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement to the Terraform AWS Infrastructure Framework!
+
+  - type: textarea
+    attributes:
+      label: Feature Description
+      description: A clear description of the feature you'd like to see
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: Module/Component
+      description: Which module would this feature enhance?
+      options:
+        - VPC
+        - Subnet
+        - Internet Gateway
+        - NAT Gateway
+        - Route Tables
+        - Security Groups
+        - VPC Endpoints
+        - EKS Cluster
+        - EKS Node Groups
+        - Elastic IPs
+        - New Module
+        - Framework/Core
+        - Documentation
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Use Case
+      description: Describe your use case and why this feature would be valuable
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Proposed Solution
+      description: How would you like this feature to work?
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Alternatives Considered
+      description: Have you considered any alternative solutions or workarounds?
+    validations:
+      required: false

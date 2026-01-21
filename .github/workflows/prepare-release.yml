@@ -1,0 +1,99 @@
+name: Prepare Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get last tag
+        id: last_tag
+        run: |
+          TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Check for commits since last tag
+        id: changes
+        run: |
+          if git log ${{ steps.last_tag.outputs.tag }}..HEAD --oneline | grep .; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: No changes detected
+        if: steps.changes.outputs.changed == 'false'
+        run: |
+          echo "No commits since last release. Skipping."
+          echo "::notice::No commits since last release"
+          exit 0
+
+      - name: Determine next version
+        if: steps.changes.outputs.changed == 'true'
+        id: version
+        run: |
+          LAST=${{ steps.last_tag.outputs.tag }}
+          COMMITS=$(git log $LAST..HEAD --pretty=%s)
+
+          IFS='.' read -r MA MI PA <<< "${LAST#v}"
+
+          if echo "$COMMITS" | grep -Eq "BREAKING CHANGE|!:"; then
+          echo "version=v$((MA+1)).0.0" >> $GITHUB_OUTPUT
+          elif echo "$COMMITS" | grep -q "^feat"; then
+            echo "version=v$MA.$((MI+1)).0" >> $GITHUB_OUTPUT
+          else
+            echo "version=v$MA.$MI.$((PA+1))" >> $GITHUB_OUTPUT
+          fi
+
+
+      - name: Install git-cliff
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          curl -sSL https://github.com/orhun/git-cliff/releases/latest/download/git-cliff-linux-amd64 \
+            -o git-cliff
+          chmod +x git-cliff
+          sudo mv git-cliff /usr/local/bin/git-cliff
+
+      - name: Update CHANGELOG.md
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git-cliff ${{ steps.last_tag.outputs.tag }}..HEAD \
+            --tag ${{ steps.version.outputs.version }} \
+            -o CHANGELOG.md
+
+
+      - name: Create release commit
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git checkout main
+          git pull origin main
+
+          git add CHANGELOG.md
+          git commit -m "chore(release): $VERSION" || echo "No changelog changes"
+          git push origin main
+
+      - name: Create annotated git tag from CHANGELOG
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+
+          # Extract ONLY this version section
+          NOTES=$(awk "/^## $VERSION/{flag=1;next}/^## /{flag=0}flag" CHANGELOG.md)
+
+          git tag -a "$VERSION" -m "$NOTES"
+          git push origin "$VERSION"

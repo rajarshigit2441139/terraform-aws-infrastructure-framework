@@ -1,0 +1,15 @@
+output.json
+.terraform
+*.tfstate.backup
+*.tfstate
+*.lock.hcl
+workspace.yml
+.DS_Store
+.terraform.tfstate.lock.info
+plan.out
+*.txt
+*.log
+*plan*
+workspace.yml
+terraform.tfvars
+terraform.tfvars.backup

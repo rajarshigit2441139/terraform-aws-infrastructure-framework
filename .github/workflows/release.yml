@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create release branch
+        run: |
+          RELEASE_BRANCH="release/${{ github.ref_name }}"
+          git checkout -b "$RELEASE_BRANCH"
+          git push origin "$RELEASE_BRANCH"
+
+      - name: Install git-cliff
+        run: |
+          curl -sSL https://github.com/orhun/git-cliff/releases/latest/download/git-cliff-linux-amd64 \
+            -o git-cliff
+          chmod +x git-cliff
+          sudo mv git-cliff /usr/local/bin/git-cliff
+
+      - name: Generate CHANGELOG
+        run: |
+          git-cliff --tag ${{ github.ref_name }} -o CHANGELOG.md
+
+      - name: Create PR with CHANGELOG
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: automation/release/changelog/${{ github.ref_name }}
+          title: "chore(release): update changelog for ${{ github.ref_name }}"
+          commit-message: "chore(release): ${{ github.ref_name }}"
+          body: |
+            Automated changelog update for release ${{ github.ref_name }}.
+          labels: automated
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true

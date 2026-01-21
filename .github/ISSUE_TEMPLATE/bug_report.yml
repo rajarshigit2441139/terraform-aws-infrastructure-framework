@@ -1,0 +1,159 @@
+name: Bug report
+description: File a bug report for the Terraform AWS Infrastructure Framework
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting an issue! Please provide detailed information about the bug to help us reproduce and fix it.
+        
+        **Before submitting:**
+        - Check existing issues to avoid duplicates
+        - Ensure you're using the latest version
+        - Review the [troubleshooting documentation](docs/TROUBLESHOOTING.md)
+        
+        For quick questions, reach out via GitHub Discussions or your team's communication channel.
+
+  - type: textarea
+    attributes:
+      label: Describe the issue
+      description: A clear description of what the bug is and steps to reproduce it.
+      placeholder: |
+        1. Configure terraform.tfvars with...
+        2. Run `terraform apply`
+        3. Observe error...
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: Affected Module(s)
+      description: Which module(s) are affected by this issue?
+      multiple: true
+      options:
+        - VPC
+        - Subnet
+        - Internet Gateway
+        - NAT Gateway
+        - Route Tables
+        - Security Groups
+        - VPC Endpoints
+        - EKS Cluster
+        - EKS Node Groups
+        - Elastic IPs
+        - Root Module/Locals
+        - Other/Multiple
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Configuration
+      description: Relevant portions of your terraform.tfvars or other configuration files
+      placeholder: |
+        ```hcl
+                vpc_parameters = {
+                  default = {
+                    my_vpc = {
+                      cidr_block = "10.10.0.0/16"
+                      # ...
+                    }
+                  }
+                }
+        ```
+      render: hcl
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Error Message/Output
+      description: Complete error message or unexpected output
+      placeholder: |
+        ```
+          Error: Error creating VPC: VpcLimitExceeded
+        ```
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: What should have happened?
+      placeholder: VPC should be created successfully with the specified CIDR block
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: VPC creation failed with VpcLimitExceeded error
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Environment
+      description: Environment information where the problem occurs
+      value: |
+        - Terraform Version: 
+        - AWS Provider Version: 
+        - AWS Region: 
+        - Operating System: 
+        - Module Version/Commit: 
+      placeholder: |
+        - Terraform Version: 1.13.3
+        - AWS Provider Version: >= 4.0
+        - AWS Region: ap-south-1
+        - Operating System: macOS 14.0
+        - Module Version/Commit: main/abc1234
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Terraform State
+      description: |
+        Output from `terraform state list` (if relevant)
+        **⚠️ Do not include sensitive information**
+      placeholder: |
+        ```
+          module.chat_app_vpc.aws_vpc.example["chat_app_dev_vpc1"]
+          module.chat_app_subnet.aws_subnet.example["cad_vpc1_pub_sub1"]
+        ```
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: |
+        Add any other context about the problem here.
+        - Screenshots
+        - Related issues
+        - Workarounds attempted
+        - Impact on your environment
+    validations:
+      required: false
+
+  - type: checkboxes
+    attributes:
+      label: Checklist
+      description: Please confirm the following
+      options:
+        - label: I have checked existing issues for duplicates
+          required: true
+        - label: I have reviewed the module's README documentation
+          required: true
+        - label: I have run `terraform validate` successfully
+          required: false
+        - label: I have sanitized any sensitive information from logs/configs
+          required: true
+        - label: I can reproduce this issue consistently
+          required: false
+
+labels:
+  - bug
+  - needs-triage
