@@ -343,9 +343,11 @@ aws eks describe-cluster --name <cluster-name>
 
 ```
 .
-├── README.md                          # This file
-├── SECURITY.md                        # Project security report
-├── LICENSE                        
+├── README.md                          # This file 
+├── CHANGELOG.md  
+├── CONTRIBUTORS.md                          
+├── SECURITY.md                        # Project security report 
+├── LICENSE 
 ├── terraform.tfvars                   # User configuration (git-ignored)
 ├── variables.tf                       # Root variable definitions
 ├── outputs.tf                         # Root outputs
@@ -397,6 +399,7 @@ aws eks describe-cluster --name <cluster-name>
     └── eks_mng/
         ├── eks_cluster/
         └── eks_nodegroups/
+
     
 ```
 

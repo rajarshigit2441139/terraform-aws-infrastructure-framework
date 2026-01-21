@@ -136,10 +136,12 @@ tree -L 2
 
 Expected structure:
 
-```text
+```text 
 .
-├── README.md                          # This file
-├── SECURITY.md                        # Project security report
+├── README.md                         
+├── CHANGELOG.md  
+├── CONTRIBUTORS.md                          
+├── SECURITY.md                        # Project security report 
 ├── LICENSE 
 ├── terraform.tfvars                   # User configuration (git-ignored)
 ├── variables.tf                       # Root variable definitions
@@ -162,7 +164,7 @@ Expected structure:
 │   └── backend.qe.conf
 │
 ├── docs/                              # Documentation
-│   ├── GETTING_STARTED.md
+│   ├── GETTING_STARTED.md             # This file 
 │   ├── NETWORKING.md
 │   ├── NETWORK_SECURITY.md
 │   ├── VPC_ENDPOINTS.md
