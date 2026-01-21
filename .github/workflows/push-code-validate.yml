@@ -2,6 +2,17 @@
 name: push-code-validate
 on:
   push:
+    paths-ignore:
+        - "**/*.md"
+        - ".github/ISSUE_TEMPLATE/**"
+        - ".github/CODEOWNERS"
+        - ".stencil/**"
+        - "backendfiles/**"
+        - "examples/**"
+        - "docs/**"
+        - ".gitignore"
+        - "LICENSE"
+
 
 jobs:
   validate:
