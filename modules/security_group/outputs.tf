@@ -5,8 +5,8 @@ output "sgs" {
   value = {
     for sgs in aws_security_group.example :
     sgs.tags.Name => {
-      name       = sgs.tags.Name
-      id         = sgs.id
+      name = sgs.tags.Name
+      id   = sgs.id
     }
   }
 }
