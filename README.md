@@ -25,7 +25,7 @@
 
 ---
 
-## 🎯 Overview
+##  Overview
 
 This Terraform framework provides a **comprehensive, production-ready infrastructure-as-code solution** for AWS. Built with modularity, scalability, and multi-environment support at its core, it enables teams to manage complex AWS architectures across development, QA, and production environments using a single codebase.
 
@@ -40,7 +40,7 @@ This Terraform framework provides a **comprehensive, production-ready infrastruc
 
 ---
 
-## ✨ Features
+##  Features
 
 ### 🏗️ Infrastructure Components
 
@@ -67,7 +67,7 @@ This Terraform framework provides a **comprehensive, production-ready infrastruc
 
 ---
 
-## 🏛️ Architecture
+##  Architecture
 
 ### High-Level Design
 
@@ -148,7 +148,7 @@ This Terraform framework provides a **comprehensive, production-ready infrastruc
 
 ---
 
-## 🛠️ Available Infrastructure
+##  Available Infrastructure
 
 ### Core Networking
 
@@ -235,7 +235,7 @@ Total                 ≈ $616.20/month
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -339,7 +339,7 @@ aws eks describe-cluster --name <cluster-name>
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 .
@@ -405,7 +405,7 @@ aws eks describe-cluster --name <cluster-name>
 
 ---
 
-## 📊 Variable Structure
+##  Variable Structure
 
 ### Overview: How Variables Work in This Framework
 
@@ -842,7 +842,7 @@ For **detailed variable schemas**, see:
 
 ---
 
-## 📚 Documentation
+##  Documentation
 
 ### Quick Links
 
@@ -872,7 +872,7 @@ See `modules/<module>/README.md` for module-specific docs.
 
 ---
 
-## 💡 Examples
+##  Examples
 
 ### Example 1: Basic Development Environment
 
@@ -969,7 +969,7 @@ vpc_endpoint_parameters = {
 
 ---
 
-## 💰 Cost Considerations
+##  Cost Considerations
 
 ### Free Resources
 
@@ -1000,9 +1000,9 @@ vpc_endpoint_parameters = {
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
-Contributions are welcome! Please follow these guidelines:
+Contributions are welcome! Please follow these [guidelines](.github/CONTRIBUTING.md):
 
 ### How to Contribute
 
@@ -1030,7 +1030,7 @@ Contributions are welcome! Please follow these guidelines:
 
 ---
 
-## 📞 Support
+##  Support
 
 ### Getting Help
 
