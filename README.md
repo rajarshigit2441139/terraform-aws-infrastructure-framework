@@ -1002,7 +1002,7 @@ vpc_endpoint_parameters = {
 
 ##  Contributing
 
-Contributions are welcome! Please follow these [guidelines](.github/CONTRIBUTING.md):
+Contributions are welcome! Please follow these [guidelines](https://github.com/rajarshigit2441139/terraform-aws-infrastructure-framework/blob/main/.github/CONTRIBUTING.md):
 
 ### How to Contribute
 
@@ -1034,7 +1034,7 @@ Contributions are welcome! Please follow these [guidelines](.github/CONTRIBUTING
 
 ### Getting Help
 
-1. **Documentation:** Start with [docs/](docs/) folder
+1. **Documentation:** Start with [docs/](https://github.com/rajarshigit2441139/terraform-aws-infrastructure-framework/tree/main/docs) folder
 2. **Module Docs:** Check `modules/<module>/README.md`
 3. **Examples:** See [docs/EXAMPLES.md](docs/EXAMPLES.md)
 4. **Troubleshooting:** Refer to [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
