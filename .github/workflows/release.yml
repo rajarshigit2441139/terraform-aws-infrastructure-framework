@@ -18,6 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.ADMIN_PAT }}
 
       - name: Create release branch
         run: |
@@ -39,7 +40,7 @@ jobs:
       - name: Create PR with CHANGELOG
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN}}
           base: main
           branch: automation/release/changelog/${{ github.ref_name }}
           title: "chore(release): update changelog for ${{ github.ref_name }}"
