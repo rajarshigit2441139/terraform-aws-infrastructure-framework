@@ -34,7 +34,7 @@ This module creates **1 type of resource**:
 ### NAT Gateway Definition
 
 ```hcl
-resource "aws_nat_gateway" "example" {
+resource "aws_nat_gateway" "nat_gateway_module" {
   for_each                           = var.nat_gateway_parameters
   connectivity_type                  = each.value.connectivity_type
   secondary_private_ip_address_count = each.value.secondary_private_ip_address_count

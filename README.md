@@ -681,7 +681,7 @@ locals {
 
 output "vpcs" {
   value = {
-    for key, vpc in aws_vpc.example :
+    for key, vpc in aws_vpc.vpc_module:
     key => {
       name       = vpc.tags["Name"]
       id         = vpc.id                      # ← VPC ID

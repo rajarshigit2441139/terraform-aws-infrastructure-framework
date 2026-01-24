@@ -30,7 +30,7 @@ modules/subnet/
 The module uses `aws_subnet` resource with `for_each` meta-argument to create multiple subnets from a map of configurations:
 
 ```hcl
-resource "aws_subnet" "example" {
+resource "aws_subnet" "subnet_module" {
   for_each                = var.subnet_parameters
   vpc_id                  = each.value.vpc_id
   cidr_block              = each.value.cidr_block

@@ -33,7 +33,7 @@ This module creates **1 type of resource**:
 ### Route Table Definition
 
 ```hcl
-resource "aws_route_table" "example" {
+resource "aws_route_table" "rt_module " {
   for_each = var.rt_parameters
   vpc_id   = each.value.vpc_id
   tags     = merge(each.value.tags, { Name : each.key })
@@ -1680,10 +1680,10 @@ rt_association_parameters = {
 **Before (inline):**
 
 ```hcl
-resource "aws_route" "example" {
-  route_table_id         = aws_route_table.example.id
+resource "aws_route" "rt_module " {
+  route_table_id         = aws_route_table.rt_module.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.example.id
+  gateway_id             = aws_internet_gateway.rt_module.id
 }
 ```
 

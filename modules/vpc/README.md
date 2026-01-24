@@ -29,7 +29,7 @@ modules/vpc/
 The module uses `aws_vpc` resource with `for_each` meta-argument to create multiple VPCs from a map of configurations:
 
 ```hcl
-resource "aws_vpc" "example" {
+resource "aws_vpc" "vpc_module" {
   for_each             = var.vpc_parameters
   cidr_block           = each.value.cidr_block
   enable_dns_support   = each.value.enable_dns_support
