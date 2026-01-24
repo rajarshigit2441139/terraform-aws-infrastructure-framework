@@ -3,7 +3,7 @@
 output "sgs" {
   description = "Map of SGs outputs by Name"
   value = {
-    for sgs in aws_security_group.example :
+    for sgs in aws_security_group.sg_module :
     sgs.tags.Name => {
       name = sgs.tags.Name
       id   = sgs.id

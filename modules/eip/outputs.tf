@@ -1,7 +1,7 @@
 output "eips" {
   description = "All Elastic IP resources created by this module."
   value = {
-    for k, eip in aws_eip.example :
+    for k, eip in aws_eip.eip_module :
     k => {
       id                = eip.id
       public_ip         = eip.public_ip

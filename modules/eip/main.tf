@@ -1,5 +1,5 @@
 # Allocate an Elastic IP
-resource "aws_eip" "example" {
+resource "aws_eip" "eip_module" {
   for_each                  = var.eip_parameters
   domain                    = each.value.domain
   network_interface         = each.value.network_interface

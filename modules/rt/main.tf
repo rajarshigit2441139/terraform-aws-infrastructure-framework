@@ -1,4 +1,4 @@
-resource "aws_route_table" "example" {
+resource "aws_route_table" "rt_module" {
   for_each = var.rt_parameters
   vpc_id   = each.value.vpc_id
   tags     = merge(each.value.tags, { Name : each.key })
