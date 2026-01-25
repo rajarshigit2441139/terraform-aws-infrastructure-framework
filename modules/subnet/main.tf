@@ -1,4 +1,4 @@
-resource "aws_subnet" "example" {
+resource "aws_subnet" "subnet_module" {
   for_each                = var.subnet_parameters
   vpc_id                  = each.value.vpc_id
   cidr_block              = each.value.cidr_block

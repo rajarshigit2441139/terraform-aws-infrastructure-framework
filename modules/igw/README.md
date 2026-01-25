@@ -33,7 +33,7 @@ This module creates **1 type of resource**:
 ### Internet Gateway Definition
 
 ```hcl
-resource "aws_internet_gateway" "example" {
+resource "aws_internet_gateway" "igw_module" {
   for_each = var.igw_parameters
   vpc_id   = each.value.vpc_id
   tags = merge(each.value.tags, {

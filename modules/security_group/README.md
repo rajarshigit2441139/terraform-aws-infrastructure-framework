@@ -37,7 +37,7 @@ This module creates **4 types of resources**:
 ### Security Group Definition
 
 ```hcl
-resource "aws_security_group" "example" {
+resource "aws_security_group" "sg_module" {
   for_each = var.security_group_parameters
   name     = each.value.name
   vpc_id   = each.value.vpc_id
@@ -1430,7 +1430,7 @@ to_port   = each.value.protocol == "-1" ? null : try(each.value.to_port, null)
 
 **Old approach (inline rules - not used in this framework):**
 ```hcl
-resource "aws_security_group" "example" {
+resource "aws_security_group" "sg_module" {
   name   = "my-sg"
   vpc_id = vpc_id
 
@@ -1446,7 +1446,7 @@ resource "aws_security_group" "example" {
 **This framework (separate rule resources):**
 ```hcl
 # Security Group (no inline rules)
-resource "aws_security_group" "example" {
+resource "aws_security_group" "sg_module" {
   name   = each.value.name
   vpc_id = each.value.vpc_id
 }

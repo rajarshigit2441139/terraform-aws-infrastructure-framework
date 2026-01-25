@@ -13,7 +13,7 @@ locals {
           subnet_ids = (
             ep.vpc_endpoint_type == "Interface" ?
             [for sn in coalesce(ep.subnet_names, []) :
-              lookup(local.subnet_id_by_name, sn)
+              lookup(local.subnet_id_by_name, sn, {})
             ] :
             null
           )
@@ -21,7 +21,7 @@ locals {
           security_group_ids = (
             ep.vpc_endpoint_type == "Interface" ?
             [for sg in coalesce(ep.security_group_names, []) :
-              lookup(local.sgs_id_by_name, sg)
+              lookup(local.sgs_id_by_name, sg, {})
             ] :
             null
           )
@@ -30,7 +30,7 @@ locals {
           route_table_ids = (
             ep.vpc_endpoint_type == "Gateway" ?
             [for rt in coalesce(ep.route_table_names, []) :
-              lookup(local.rt_id_by_name, rt)
+              lookup(local.rt_id_by_name, rt, {})
             ] :
             null
           )

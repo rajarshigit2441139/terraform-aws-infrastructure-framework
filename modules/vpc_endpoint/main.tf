@@ -1,5 +1,5 @@
 
-resource "aws_vpc_endpoint" "example" {
+resource "aws_vpc_endpoint" "vpc_endpoint_module" {
   for_each = var.vpc_endpoints
 
   vpc_id            = each.value.vpc_id

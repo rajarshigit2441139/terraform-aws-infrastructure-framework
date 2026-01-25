@@ -1,4 +1,4 @@
-resource "aws_nat_gateway" "example" {
+resource "aws_nat_gateway" "nat_gateway_module" {
   for_each                           = var.nat_gateway_parameters
   connectivity_type                  = each.value.connectivity_type                  # Uset it for Private NAT only. value = "private"
   secondary_private_ip_address_count = each.value.secondary_private_ip_address_count # Uset it for Private NAT with Secondary Private IP Addresses only. value = number 

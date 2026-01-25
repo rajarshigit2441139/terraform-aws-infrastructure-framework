@@ -55,7 +55,7 @@ Other                  2%  ██
 **💡 Optimization:**
 ```hcl
 # ✅ Good: Release unused EIPs immediately
-terraform destroy -target=module.chat_app_eip.aws_eip.example[\"unused_eip\"]
+terraform destroy -target=module.chat_app_eip.aws_eip.eip_module[\"unused_eip\"]
 
 # ❌ Bad: Keeping 5 unattached EIPs
 # Cost: 5 × $43.80/year = $219/year wasted
@@ -460,7 +460,7 @@ aws ec2 describe-addresses \
 aws ec2 release-address --allocation-id eipalloc-xxxxx
 
 # Or via Terraform
-terraform destroy -target=module.chat_app_eip.aws_eip.example[\"unused_eip\"]
+terraform destroy -target=module.chat_app_eip.aws_eip.eip_module[\"unused_eip\"]
 
 # 💰 Potential savings: $3.60/month per EIP
 ```

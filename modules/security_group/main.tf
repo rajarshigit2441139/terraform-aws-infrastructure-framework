@@ -1,6 +1,6 @@
 # Child SG Module
 
-resource "aws_security_group" "example" {
+resource "aws_security_group" "sg_module" {
   for_each = var.security_group_parameters
   name     = each.value.name
   vpc_id   = each.value.vpc_id

@@ -34,7 +34,7 @@ This module creates **1 type of resource**:
 ### EIP Definition
 
 ```hcl
-resource "aws_eip" "example" {
+resource "aws_eip" "eip_module" {
   for_each                  = var.eip_parameters
   domain                    = each.value.domain
   network_interface         = each.value.network_interface
@@ -976,7 +976,7 @@ aws ec2 describe-addresses \
   --output table
 
 # Release unused EIP
-terraform destroy -target=module.chat_app_eip.aws_eip.example[\"unused_eip\"]
+terraform destroy -target=module.chat_app_eip.aws_eip.eip_module[\"unused_eip\"]
 ```
 
 ## Cost Considerations
@@ -1366,7 +1366,7 @@ ssh -i key.pem ec2-user@<private-ip>
 
 ```bash
 # Step 1: Import existing EIP
-terraform import 'module.chat_app_eip.aws_eip.example["existing_eip"]' eipalloc-xxxxx
+terraform import 'module.chat_app_eip.aws_eip.eip_module["existing_eip"]' eipalloc-xxxxx
 
 # Step 2: Add to terraform.tfvars
 eip_parameters = {
@@ -1394,10 +1394,10 @@ terraform apply
 # Scenario: Moving EIP from old NAT to new NAT
 
 # Step 1: Destroy old NAT Gateway (releases EIP association)
-terraform destroy -target=module.chat_app_nat.aws_nat_gateway.example[\"old_nat\"]
+terraform destroy -target=module.chat_app_nat.aws_nat_gateway.nat_gateway_module[\"old_nat\"]
 
 # Step 2: Create new NAT Gateway (reuses same EIP)
-terraform apply -target=module.chat_app_nat.aws_nat_gateway.example[\"new_nat\"]
+terraform apply -target=module.chat_app_nat.aws_nat_gateway.nat_gateway_module[\"new_nat\"]
 
 # EIP allocation_id remains the same, just reassociated
 ```
