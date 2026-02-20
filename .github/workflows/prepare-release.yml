@@ -71,10 +71,12 @@ jobs:
       - name: Install git-cliff
         if: steps.changes.outputs.changed == 'true'
         run: |
-          curl -sSL https://github.com/orhun/git-cliff/releases/latest/download/git-cliff-linux-amd64 \
-            -o git-cliff
-          chmod +x git-cliff
-          sudo mv git-cliff /usr/local/bin/git-cliff
+          VERSION="2.12.0"
+          curl -sSL "https://github.com/orhun/git-cliff/releases/download/v${VERSION}/git-cliff-${VERSION}-x86_64-unknown-linux-gnu.tar.gz" \
+            -o git-cliff.tar.gz
+          tar -xzf git-cliff.tar.gz
+          sudo mv git-cliff-${VERSION}-x86_64-unknown-linux-gnu/git-cliff /usr/local/bin/git-cliff
+          git-cliff --version
 
       - name: Update CHANGELOG.md
         if: steps.changes.outputs.changed == 'true'
