@@ -75,7 +75,9 @@ jobs:
           curl -sSL "https://github.com/orhun/git-cliff/releases/download/v${VERSION}/git-cliff-${VERSION}-x86_64-unknown-linux-gnu.tar.gz" \
             -o git-cliff.tar.gz
           tar -xzf git-cliff.tar.gz
+
           sudo mv git-cliff-${VERSION}/git-cliff /usr/local/bin/git-cliff
+
           git-cliff --version
 
       - name: Update CHANGELOG.md
