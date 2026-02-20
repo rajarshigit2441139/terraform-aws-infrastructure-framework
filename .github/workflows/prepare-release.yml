@@ -26,7 +26,13 @@ jobs:
       - name: Check for commits since last tag
         id: changes
         run: |
-          if git log ${{ steps.last_tag.outputs.tag }}..HEAD --oneline | grep .; then
+          LAST=${{ steps.last_tag.outputs.tag }}
+          if git rev-parse "$LAST" >/dev/null 2>&1; then
+            BASE=$LAST
+          else
+            BASE=$(git rev-list --max-parents=0 HEAD)
+          fi
+          if git log $BASE..HEAD --oneline | grep .; then
             echo "changed=true" >> $GITHUB_OUTPUT
           else
             echo "changed=false" >> $GITHUB_OUTPUT
@@ -44,12 +50,17 @@ jobs:
         id: version
         run: |
           LAST=${{ steps.last_tag.outputs.tag }}
-          COMMITS=$(git log $LAST..HEAD --pretty=%s)
+          if git rev-parse "$LAST" >/dev/null 2>&1; then
+            BASE=$LAST
+          else
+            BASE=$(git rev-list --max-parents=0 HEAD)
+          fi
+          COMMITS=$(git log $BASE..HEAD --pretty=%s)
 
           IFS='.' read -r MA MI PA <<< "${LAST#v}"
 
           if echo "$COMMITS" | grep -Eq "BREAKING CHANGE|!:"; then
-          echo "version=v$((MA+1)).0.0" >> $GITHUB_OUTPUT
+            echo "version=v$((MA+1)).0.0" >> $GITHUB_OUTPUT
           elif echo "$COMMITS" | grep -q "^feat"; then
             echo "version=v$MA.$((MI+1)).0" >> $GITHUB_OUTPUT
           else
@@ -68,7 +79,13 @@ jobs:
       - name: Update CHANGELOG.md
         if: steps.changes.outputs.changed == 'true'
         run: |
-          git-cliff ${{ steps.last_tag.outputs.tag }}..HEAD \
+          LAST=${{ steps.last_tag.outputs.tag }}
+          if git rev-parse "$LAST" >/dev/null 2>&1; then
+            BASE=$LAST
+          else
+            BASE=$(git rev-list --max-parents=0 HEAD)
+          fi
+          git-cliff $BASE..HEAD \
             --tag ${{ steps.version.outputs.version }} \
             -o CHANGELOG.md
 
