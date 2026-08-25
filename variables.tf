@@ -215,6 +215,11 @@ variable "eks_nodegroups" {
     subnet_ids                = optional(list(string))
     node_security_group_names = list(string)
     tags                      = map(string)
+    taints = optional(list(object({
+      key    = string
+      value  = string
+      effect = string
+    })), [])
   }))))
   default = {}
 }

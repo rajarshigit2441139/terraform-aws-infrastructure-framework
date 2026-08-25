@@ -14,6 +14,11 @@ variable "nodegroup_parameters" {
     subnet_ids              = list(string)
     node_security_group_ids = list(string)
     tags                    = map(string)
+    taints = optional(list(object({
+      key    = string
+      value  = string
+      effect = string
+    })), [])
   }))
 }
 
