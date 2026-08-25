@@ -142,6 +142,16 @@ resource "aws_eks_node_group" "nodegroup" {
     version = "$Latest"
   }
 
+  dynamic "taint" {
+    for_each = each.value.taints
+
+    content {
+      key    = taint.value.key
+      value  = taint.value.value
+      effect = taint.value.effect
+    }
+  }
+
   lifecycle {
     prevent_destroy = false
     ignore_changes  = [tags]
